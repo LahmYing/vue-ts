@@ -1,0 +1,18 @@
+@use "sass:math";
+
+/**
+用法：px2rem(36,2);
+$px 原设计稿的像素
+$dpr 原设计稿的比例，
+若设计稿是375px时，$dpr=1；
+若设计稿是750px时，$dpr=2；
+*/
+@function px2rem($px, $dpr: 1) {
+  $rem: 37.5 * $dpr;
+
+  @return (math.div($px, $rem)) + rem;
+}
+
+@function px($px) {
+  @return $px + px;
+}
