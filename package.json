@@ -14,7 +14,7 @@
     "pre-commit": "lint-staged"
   },
   "lint-staged": {
-    "*.{ts,js,vue}": [
+    "*.{ts,js,vue,scss}": [
       "vue-cli-service lint --fix",
       "prettier --write"
     ]
