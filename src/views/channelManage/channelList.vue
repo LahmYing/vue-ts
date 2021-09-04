@@ -1,5 +1,8 @@
 <template>
-  <div class="channel-manage">channel-manage</div>
+  <div class="channel-manage">
+    channel-manage
+    <div id="next-tick-html">{{ "showDelModal: " }}{{ showDelModal }}</div>
+  </div>
 </template>
 
 <script lang="ts">
@@ -17,6 +20,7 @@ interface ActiveRow {
   telephone?: null | string;
   address?: null | string;
   cooperation_time?: null | number;
+  click?: () => boolean; // function
 }
 
 // required even empty
@@ -43,6 +47,14 @@ export default class ChannelList extends Vue {
 
   // life hook
   created() {
+    this.showDelModal = true;
+    console.log("no-next-tick-value", this.showDelModal);
+    console.log("no-next-tick-dom", document.getElementById("next-tick-html"));
+    this.$nextTick(() => {
+      console.log("next-tick-value", this.showDelModal);
+      console.log("next-tick-dom", document.getElementById("next-tick-html"));
+    });
+
     console.log("created");
     console.log("state_store_id", this.state_store_id);
     console.log("getter_tel", this.getter_tel);
