@@ -16,7 +16,7 @@ module.exports = {
     },
   },
   // https://cli.vuejs.org/zh/config/#publicpath
-  publicPath: "/adPlatform/",
+  publicPath: "/childHost/",
 
   configureWebpack: {
     plugins: [],

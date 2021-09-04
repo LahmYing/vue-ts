@@ -1,6 +1,6 @@
 <template>
-  <div class="channel-manage">
-    channel-manage
+  <div class="home-manage">
+    home-manage
     <div id="next-tick-html">{{ "showDelModal: " }}{{ showDelModal }}</div>
   </div>
 </template>
@@ -10,9 +10,9 @@ import { Vue, Component, Prop, Watch } from "vue-property-decorator";
 import { State, Getter, Action } from "vuex-class";
 
 interface ActiveRow {
-  channel?: null | string;
-  channel_name?: null | string;
-  channel_type?: null | string;
+  home?: null | string;
+  home_name?: null | string;
+  home_type?: null | string;
   settlement_type?: string;
   createTime?: null | number;
   strategy?: null | string;
@@ -25,11 +25,11 @@ interface ActiveRow {
 
 // required even empty
 @Component({})
-export default class ChannelList extends Vue {
+export default class Home extends Vue {
   activeRow: ActiveRow = {
-    channel: null,
-    channel_name: null,
-    channel_type: null,
+    home: null,
+    home_name: null,
+    home_type: null,
     settlement_type: "",
     createTime: null,
     strategy: null,
@@ -38,12 +38,32 @@ export default class ChannelList extends Vue {
   showDelModal = false;
   filter: string[] | number[];
 
-  @State((state) => state.home.store_id) state_store_id;
+  @Prop({ default: () => [] })
+  checked_list: string[];
+
+  @Prop({ default: false })
+  hide_check_all: boolean;
+
+  @Prop({
+    default: () => [],
+    validator: (actions) => actions.every((item) => item.name),
+  })
+  actions: any[];
+
+  @Prop({ default: "" })
+  title: string;
+
+  @State((state) => state.home.store_id)
+  state_store_id: string;
+
   // By default, actions and mutations inside a module are still registered under the global namespace
   // this allows multiple modules to react to the same action/mutation type
   // so we can use action/mutation directly as follow
-  @Action("setConfig") actionSetConfig; // use action method: setConfig
-  @Getter("getter_tel") getter_tel;
+  @Action("setConfig")
+  actionSetConfig; // use action method: setConfig
+
+  @Getter("getter_tel")
+  getter_tel: string;
 
   // life hook
   created() {
@@ -61,8 +81,8 @@ export default class ChannelList extends Vue {
     this.actionSetConfig(this.state_store_id);
   }
 
-  @Watch("channel_name", { immediate: true, deep: true })
-  onChannelNameChanged(val, oldVal) {
+  @Watch("home_name", { immediate: true, deep: true })
+  onHomeNameChanged(val, oldVal) {
     //
   }
   @Watch("$route")

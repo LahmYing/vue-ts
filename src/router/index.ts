@@ -20,14 +20,14 @@ const routes: Array<RouteConfig> = [
   {
     path: "/",
     component: () => import("@/layout/index.vue"),
-    redirect: "/channel/list",
+    redirect: "/home",
     children: [
       {
-        path: "channel/list",
-        component: () => import("@/views/channelManage/channelList.vue"),
-        name: "ChannelList",
+        path: "home",
+        component: () => import("../views/home.vue"),
+        name: "Home",
         meta: {
-          name: "channel",
+          name: "home",
         },
       },
     ],
@@ -35,7 +35,7 @@ const routes: Array<RouteConfig> = [
 ];
 
 const router = new VueRouter({
-  base: "/adPlatform/",
+  base: "/childHost/",
   routes,
 });
 
