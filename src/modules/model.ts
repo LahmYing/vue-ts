@@ -1,5 +1,5 @@
 import axios from "axios";
-import Message from "view-design/src/components/message";
+// import Message from "view-design/src/components/message";
 
 import SomeApi from "./SomeApi";
 
@@ -86,7 +86,7 @@ axios.interceptors.response.use(
     }
 
     if (error.message) {
-      Message.error(error.message);
+      alert(error.message);
     }
     return Promise.reject(error);
   }

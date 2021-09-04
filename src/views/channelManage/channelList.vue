@@ -4,6 +4,7 @@
 
 <script lang="ts">
 import { Vue, Component, Prop, Watch } from "vue-property-decorator";
+import { State, Getter, Action } from "vuex-class";
 
 interface ActiveRow {
   channel?: null | string;
@@ -18,7 +19,7 @@ interface ActiveRow {
   cooperation_time?: null | number;
 }
 
-// required
+// required even empty
 @Component({})
 export default class ChannelList extends Vue {
   activeRow: ActiveRow = {
@@ -31,14 +32,40 @@ export default class ChannelList extends Vue {
     status: null,
   };
   showDelModal = false;
-  filter: any;
+  filter: string[] | number[];
 
+  @State((state) => state.home.store_id) state_store_id;
+  // By default, actions and mutations inside a module are still registered under the global namespace
+  // this allows multiple modules to react to the same action/mutation type
+  // so we can use action/mutation directly as follow
+  @Action("setConfig") actionSetConfig; // use action method: setConfig
+  @Getter("getter_tel") getter_tel;
+
+  // life hook
   created() {
     console.log("created");
+    console.log("state_store_id", this.state_store_id);
+    console.log("getter_tel", this.getter_tel);
+    this.actionSetConfig(this.state_store_id);
   }
 
+  @Watch("channel_name", { immediate: true, deep: true })
+  onChannelNameChanged(val, oldVal) {
+    //
+  }
+  @Watch("$route")
+  onRouteChanged() {
+    //
+  }
+
+  // method
   someMethod() {
     // someMethod
+  }
+
+  // computed
+  get computedProperty() {
+    return 0;
   }
 }
 </script>
