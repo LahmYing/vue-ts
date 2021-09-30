@@ -1,5 +1,7 @@
 # vue-ts
 
+vue-ts 项目模板
+
 ## Project setup
 ```
 yarn install
